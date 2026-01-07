@@ -51,7 +51,7 @@ public class BasicGameApp implements Runnable {
    // This is the code that runs first and automatically
 	public static void main(String[] args) {
 		BasicGameApp ex = new BasicGameApp();   //creates a new instance of the game
-		new Thread(ex).start();                 //creates a threads & starts up the code in the run( ) method  
+		new Thread(ex).start(); //stuff                //creates a threads & starts up the code in the run( ) method
 	}
 
 
