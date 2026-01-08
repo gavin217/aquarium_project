@@ -39,11 +39,15 @@ public class BasicGameApp implements Runnable {
    
 	public BufferStrategy bufferStrategy;
 	public Image soccerPic;
+    public Image soccerPic2;
     public Image Soccerball;
+    public Image soccerfield;
+
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private soccer_player messi;
+    private soccer_player Van_dijk;
     private Soccer_ball Genericball;
 
 
@@ -65,9 +69,15 @@ public class BasicGameApp implements Runnable {
        
       //variable and objects
       //create (construct) the objects needed for the game and load up 
-		soccerPic = Toolkit.getDefaultToolkit().getImage("messi.jpeg"); //load the picture
+		soccerPic = Toolkit.getDefaultToolkit().getImage("messi.jpeg");
+        soccerPic2 = Toolkit.getDefaultToolkit().getImage("van dijk.jpeg");
+        //load the picture
 		messi = new soccer_player(10,100);
-        Soccerball= Toolkit.getDefaultToolkit().getImage("soccerball.jpeg");
+        Van_dijk=new soccer_player(910,600);
+        Soccerball= Toolkit.getDefaultToolkit().getImage("soccerball.jpg");
+        Genericball= new Soccer_ball(400,500);
+        soccerfield=Toolkit.getDefaultToolkit().getImage("field.jpeg");
+
 
 
 	}// BasicGameApp()
@@ -96,6 +106,8 @@ public class BasicGameApp implements Runnable {
 	{
       //calls the move( ) code in the objects
 		messi.move();
+        Van_dijk.move();
+        Genericball.move();
 
 	}
 	
@@ -146,8 +158,11 @@ public class BasicGameApp implements Runnable {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
       //draw the image of the astronaut
+        g.drawImage(soccerfield,0,0,1000,700,null);
 		g.drawImage(soccerPic, messi.xpos, messi.ypos, messi.width, messi.height, null);
+        g.drawImage(soccerPic2, Van_dijk.xpos, Van_dijk.ypos, messi.width, messi.height, null);
         g.drawImage(Soccerball, Genericball.xpos, Genericball.ypos, Genericball.width, Genericball.height, null);
+
 		g.dispose();
 
 		bufferStrategy.show();
