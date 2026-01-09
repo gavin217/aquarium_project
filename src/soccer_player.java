@@ -1,3 +1,5 @@
+import java.awt.*;
+
 /**
  * Created by chales on 11/6/2017.
  */
@@ -12,7 +14,10 @@ public class soccer_player {
     public int dy;                    //the speed of the hero in the y direction
     public int width;
     public int height;
-    public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
+    public boolean isAlive;//a boolean to denote if the hero is alive or dead.
+    public Rectangle body;
+
+
 
 
     // METHOD DEFINITION SECTION
@@ -31,6 +36,8 @@ public class soccer_player {
         width = 60;
         height = 60;
         isAlive = true;
+        body= new Rectangle(xpos,ypos,width,height);
+
  
     } // constructor
 
@@ -38,6 +45,7 @@ public class soccer_player {
     public void move() {
         xpos = xpos + dx;
         ypos = ypos + dy;
+        body= new Rectangle(xpos,ypos,width,height);
  
     }
 }

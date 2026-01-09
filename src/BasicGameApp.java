@@ -162,6 +162,8 @@ public class BasicGameApp implements Runnable {
 		g.drawImage(soccerPic, messi.xpos, messi.ypos, messi.width, messi.height, null);
         g.drawImage(soccerPic2, Van_dijk.xpos, Van_dijk.ypos, messi.width, messi.height, null);
         g.drawImage(Soccerball, Genericball.xpos, Genericball.ypos, Genericball.width, Genericball.height, null);
+        g.drawRect(Soccerball.hitbox.x,Soccerball.hitbox.y, Genericball.width, Genericball.height);
+
 
 		g.dispose();
 
