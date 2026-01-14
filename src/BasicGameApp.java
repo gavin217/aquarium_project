@@ -73,7 +73,7 @@ public class BasicGameApp implements Runnable {
         soccerPic2 = Toolkit.getDefaultToolkit().getImage("van dijk.jpeg");
         //load the picture
 		messi = new soccer_player(10,100);
-        Van_dijk=new soccer_player(910,600);
+        Van_dijk=new soccer_player(10,600);
         Soccerball= Toolkit.getDefaultToolkit().getImage("soccerball.jpg");
         Genericball= new Soccer_ball(400,500);
         soccerfield=Toolkit.getDefaultToolkit().getImage("field.jpeg");
@@ -108,9 +108,16 @@ public class BasicGameApp implements Runnable {
 		messi.move();
         Van_dijk.move();
         Genericball.move();
+        colliding();
 
 	}
-	
+	public void colliding(){
+        if(messi.body.intersects(Van_dijk.body)&&messi.body.y+60>Van_dijk.body.y){
+
+                messi.dy = -messi.dy;
+                Van_dijk.dy = -Van_dijk.dy;
+        }
+    }
    //Pauses or sleeps the computer for the amount specified in milliseconds
    public void pause(int time ){
    		//sleep
@@ -162,8 +169,9 @@ public class BasicGameApp implements Runnable {
 		g.drawImage(soccerPic, messi.xpos, messi.ypos, messi.width, messi.height, null);
         g.drawImage(soccerPic2, Van_dijk.xpos, Van_dijk.ypos, messi.width, messi.height, null);
         g.drawImage(Soccerball, Genericball.xpos, Genericball.ypos, Genericball.width, Genericball.height, null);
-        g.drawRect(Soccerball.hitbox.x,Soccerball.hitbox.y, Genericball.width, Genericball.height);
-
+        g.drawRect(Genericball.hitbox.x, Genericball.hitbox.y,Genericball.width,Genericball.height);
+        g.drawRect(messi.body.x,messi.body.y,messi.width,messi.height);
+        g.drawRect(Van_dijk.body.x,Van_dijk.body.y,Van_dijk.width,Van_dijk.height);
 
 		g.dispose();
 

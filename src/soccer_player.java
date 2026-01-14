@@ -31,8 +31,8 @@ public class soccer_player {
     public soccer_player(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx =1;
-        dy =0;
+        dx =0;
+        dy =1;
         width = 60;
         height = 60;
         isAlive = true;
@@ -46,6 +46,18 @@ public class soccer_player {
         xpos = xpos + dx;
         ypos = ypos + dy;
         body= new Rectangle(xpos,ypos,width,height);
+        if(xpos>940){
+            dx=-dx;
+        }
+        if(xpos<-0){
+            dx=-dx;
+        }
+        if(ypos>640){
+            dy=-dy;
+        }
+        if(ypos<0){
+            dy=-dy;
+        }
  
     }
 }

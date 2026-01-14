@@ -27,8 +27,8 @@ public class Soccer_ball {
     public Soccer_ball(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx = 1;
-        dy = 0;
+        dx = 5;
+        dy = 5;
         width = 60;
         height = 60;
         isAlive = true;
@@ -42,6 +42,18 @@ public class Soccer_ball {
         xpos = xpos + dx;
         ypos = ypos + dy;
         hitbox= new Rectangle(xpos,ypos,width,height);
+        if(xpos>1061){
+            xpos=-60;
+        }
+        if(xpos<-61){
+            xpos=1060;
+        }
+        if(ypos>761){
+            ypos=-60;
+        }
+        if(ypos<-61){
+            ypos=760;
+        }
 
 
     }
