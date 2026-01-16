@@ -72,8 +72,8 @@ public class BasicGameApp implements Runnable {
 		soccerPic = Toolkit.getDefaultToolkit().getImage("messi.jpeg");
         soccerPic2 = Toolkit.getDefaultToolkit().getImage("van dijk.jpeg");
         //load the picture
-		messi = new soccer_player(10,100);
-        Van_dijk=new soccer_player(10,600);
+		messi = new soccer_player(10,600);
+        Van_dijk=new soccer_player(10,100);
         Soccerball= Toolkit.getDefaultToolkit().getImage("soccerball.jpg");
         Genericball= new Soccer_ball(400,500);
         soccerfield=Toolkit.getDefaultToolkit().getImage("field.jpeg");
@@ -116,6 +116,21 @@ public class BasicGameApp implements Runnable {
 
                 messi.dy = -messi.dy;
                 Van_dijk.dy = -Van_dijk.dy;
+        }
+        if(messi.body.intersects(Van_dijk.body)&&messi.body.y+60<Van_dijk.body.y){
+
+            messi.dy = -messi.dy;
+            Van_dijk.dy = -Van_dijk.dy;
+        }
+        if(messi.body.intersects(Van_dijk.body)&&messi.body.x+60>Van_dijk.body.x){
+
+            messi.dx = -messi.dx;
+            Van_dijk.dx = -Van_dijk.dx;
+        }
+        if(messi.body.intersects(Van_dijk.body)&&messi.body.x+60<Van_dijk.body.x){
+
+            messi.dx = -messi.dx;
+            Van_dijk.dx = -Van_dijk.dx;
         }
     }
    //Pauses or sleeps the computer for the amount specified in milliseconds
