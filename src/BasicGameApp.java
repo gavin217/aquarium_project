@@ -66,7 +66,7 @@ public class BasicGameApp implements Runnable {
 	public BasicGameApp() {
       
       setUpGraphics();
-       
+       int randx=(int)(Math.random()*900)+1;//gonna make the players spwawn anywhere on their half
       //variable and objects
       //create (construct) the objects needed for the game and load up 
 		soccerPic = Toolkit.getDefaultToolkit().getImage("messi.jpeg");
