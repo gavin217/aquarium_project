@@ -111,7 +111,7 @@ public class BasicGameApp implements Runnable {
         colliding();
 
 	}
-	public void colliding(){
+	public void colliding(){//makes the colliding depend upon where each other is
         if(messi.body.intersects(Van_dijk.body)&&messi.body.y+60>Van_dijk.body.y){
 
                 messi.dy = -messi.dy;
