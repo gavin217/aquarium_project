@@ -72,7 +72,7 @@ public class BasicGameApp implements Runnable {
 		soccerPic = Toolkit.getDefaultToolkit().getImage("messi.jpeg");
         soccerPic2 = Toolkit.getDefaultToolkit().getImage("van dijk.jpeg");
         //load the picture
-		messi = new soccer_player(10,600);
+		messi = new soccer_player(940,600);
         Van_dijk=new soccer_player(10,100);
         Soccerball= Toolkit.getDefaultToolkit().getImage("soccerball.jpg");
         Genericball= new Soccer_ball(400,500);
@@ -111,13 +111,13 @@ public class BasicGameApp implements Runnable {
         colliding();
 
 	}
-	public void colliding(){//makes the colliding depend upon where each other is
+	public void colliding(){//fix it bc it passes through if bottom right below top left
         if(messi.body.intersects(Van_dijk.body)&&messi.body.y+60>Van_dijk.body.y){
 
-                messi.dy = -messi.dy;
-                Van_dijk.dy = -Van_dijk.dy;
+            messi.dy = -messi.dy;
+            Van_dijk.dy = -Van_dijk.dy;
         }
-        if(messi.body.intersects(Van_dijk.body)&&messi.body.y+60<Van_dijk.body.y){
+        if(messi.body.intersects(Van_dijk.body)&&Van_dijk.body.y+60>messi.body.y){
 
             messi.dy = -messi.dy;
             Van_dijk.dy = -Van_dijk.dy;
@@ -127,10 +127,50 @@ public class BasicGameApp implements Runnable {
             messi.dx = -messi.dx;
             Van_dijk.dx = -Van_dijk.dx;
         }
-        if(messi.body.intersects(Van_dijk.body)&&messi.body.x+60<Van_dijk.body.x){
+        if(messi.body.intersects(Van_dijk.body)&&Van_dijk.body.x+60>messi.body.x){
 
             messi.dx = -messi.dx;
             Van_dijk.dx = -Van_dijk.dx;
+        }
+        if(messi.body.intersects(Genericball.hitbox)&&messi.body.y+60>Genericball.hitbox.y){
+
+            messi.dy = -messi.dy;
+            Genericball.dy = -Genericball.dy;
+        }
+        if(messi.body.intersects(Genericball.hitbox)&&Genericball.hitbox.y+60>messi.body.y){
+
+            messi.dy = -messi.dy;
+            Genericball.dy = -Genericball.dy;
+        }
+        if(messi.body.intersects(Genericball.hitbox)&&messi.body.x+60>Genericball.hitbox.x){
+
+            messi.dx = -messi.dx;
+            Genericball.dx = -Genericball.dx;
+        }
+        if(messi.body.intersects(Genericball.hitbox)&&Genericball.hitbox.x+60>messi.body.x){
+
+            messi.dx = -messi.dx;
+            Genericball.dx = -Genericball.dx;
+        }
+        if(Van_dijk.body.intersects(Genericball.hitbox)&&Van_dijk.body.y+60>Genericball.hitbox.y){
+
+            Van_dijk.dy = -Van_dijk.dy;
+            Genericball.dy = -Genericball.dy;
+        }
+        if(Van_dijk.body.intersects(Genericball.hitbox)&&Genericball.hitbox.y+60>Van_dijk.body.y){
+
+            Van_dijk.dy = -Van_dijk.dy;
+            Genericball.dy = -Genericball.dy;
+        }
+        if(Van_dijk.body.intersects(Genericball.hitbox)&&Van_dijk.body.x+60>Genericball.hitbox.x){
+
+            Van_dijk.dx = -Van_dijk.dx;
+            Genericball.dx = -Genericball.dx;
+        }
+        if(Van_dijk.body.intersects(Genericball.hitbox)&&Genericball.hitbox.x+60>Van_dijk.body.x){
+
+            Van_dijk.dx = -Van_dijk.dx;
+            Genericball.dx = -Genericball.dx;
         }
     }
    //Pauses or sleeps the computer for the amount specified in milliseconds
