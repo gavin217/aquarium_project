@@ -109,65 +109,72 @@ public class BasicGameApp implements Runnable {
         Van_dijk.move();
         Genericball.move();
         colliding();
+        //testcolliding();
 
 	}
-	public void colliding(){//fix it bc it passes through if bottom right below top left
-        if(messi.body.intersects(Van_dijk.body)&&messi.body.y+60>Van_dijk.body.y){
+    public void testcolliding(){
+        if(messi.body.intersects(Van_dijk.body)){
+            messi.dy = -messi.dy;
+            Van_dijk.dy = -Van_dijk.dy;
+        }
+    }
+	public void colliding(){
+        if(messi.body.intersects(Van_dijk.body)&&messi.dy==-Van_dijk.dy){
 
             messi.dy = -messi.dy;
             Van_dijk.dy = -Van_dijk.dy;
         }
-        if(messi.body.intersects(Van_dijk.body)&&Van_dijk.body.y+60>messi.body.y){
+        if(messi.body.intersects(Van_dijk.body)&&Van_dijk.dy==-messi.dy){
 
             messi.dy = -messi.dy;
             Van_dijk.dy = -Van_dijk.dy;
         }
-        if(messi.body.intersects(Van_dijk.body)&&messi.body.x+60>Van_dijk.body.x){
+        if(messi.body.intersects(Van_dijk.body)&&messi.dx==-Van_dijk.dx){
 
             messi.dx = -messi.dx;
             Van_dijk.dx = -Van_dijk.dx;
         }
-        if(messi.body.intersects(Van_dijk.body)&&Van_dijk.body.x+60>messi.body.x){
+        if(messi.body.intersects(Van_dijk.body)&&Van_dijk.dx==-messi.dx){
 
             messi.dx = -messi.dx;
             Van_dijk.dx = -Van_dijk.dx;
         }
-        if(messi.body.intersects(Genericball.hitbox)&&messi.body.y+60>Genericball.hitbox.y){
+        if(messi.body.intersects(Genericball.hitbox)&&messi.dy==-Genericball.dy){
 
             messi.dy = -messi.dy;
             Genericball.dy = -Genericball.dy;
         }
-        if(messi.body.intersects(Genericball.hitbox)&&Genericball.hitbox.y+60>messi.body.y){
+        if(messi.body.intersects(Genericball.hitbox)&&Genericball.dy==-messi.dy){
 
             messi.dy = -messi.dy;
             Genericball.dy = -Genericball.dy;
         }
-        if(messi.body.intersects(Genericball.hitbox)&&messi.body.x+60>Genericball.hitbox.x){
+        if(messi.body.intersects(Genericball.hitbox)&&messi.dx==-Genericball.dx){
 
             messi.dx = -messi.dx;
             Genericball.dx = -Genericball.dx;
         }
-        if(messi.body.intersects(Genericball.hitbox)&&Genericball.hitbox.x+60>messi.body.x){
+        if(messi.body.intersects(Genericball.hitbox)&&Genericball.dx==-messi.dx){
 
             messi.dx = -messi.dx;
             Genericball.dx = -Genericball.dx;
         }
-        if(Van_dijk.body.intersects(Genericball.hitbox)&&Van_dijk.body.y+60>Genericball.hitbox.y){
+        if(Van_dijk.body.intersects(Genericball.hitbox)&&Van_dijk.dy==-Genericball.dy){
 
             Van_dijk.dy = -Van_dijk.dy;
             Genericball.dy = -Genericball.dy;
         }
-        if(Van_dijk.body.intersects(Genericball.hitbox)&&Genericball.hitbox.y+60>Van_dijk.body.y){
+        if(Van_dijk.body.intersects(Genericball.hitbox)&&Genericball.dy==-Van_dijk.dy){
 
             Van_dijk.dy = -Van_dijk.dy;
             Genericball.dy = -Genericball.dy;
         }
-        if(Van_dijk.body.intersects(Genericball.hitbox)&&Van_dijk.body.x+60>Genericball.hitbox.x){
+        if(Van_dijk.body.intersects(Genericball.hitbox)&&Van_dijk.dx==-Genericball.dx){
 
             Van_dijk.dx = -Van_dijk.dx;
             Genericball.dx = -Genericball.dx;
         }
-        if(Van_dijk.body.intersects(Genericball.hitbox)&&Genericball.hitbox.x+60>Van_dijk.body.x){
+        if(Van_dijk.body.intersects(Genericball.hitbox)&&Genericball.dx==-Van_dijk.dx){
 
             Van_dijk.dx = -Van_dijk.dx;
             Genericball.dx = -Genericball.dx;
@@ -224,10 +231,10 @@ public class BasicGameApp implements Runnable {
 		g.drawImage(soccerPic, messi.xpos, messi.ypos, messi.width, messi.height, null);
         g.drawImage(soccerPic2, Van_dijk.xpos, Van_dijk.ypos, messi.width, messi.height, null);
         g.drawImage(Soccerball, Genericball.xpos, Genericball.ypos, Genericball.width, Genericball.height, null);
+        g.setColor(Color.red);
         g.drawRect(Genericball.hitbox.x, Genericball.hitbox.y,Genericball.width,Genericball.height);
         g.drawRect(messi.body.x,messi.body.y,messi.width,messi.height);
         g.drawRect(Van_dijk.body.x,Van_dijk.body.y,Van_dijk.width,Van_dijk.height);
-
 		g.dispose();
 
 		bufferStrategy.show();
