@@ -42,6 +42,12 @@ public class BasicGameApp implements Runnable {
     public Image soccerPic2;
     public Image Soccerball;
     public Image soccerfield;
+    public int left_score;
+    public int right_score;
+    public int randx=(int)(Math.random()*400)+1;
+    public int randy=(int)(Math.random()*600)+1;
+    public int randx2=(int)(Math.random()*330)+600;
+    public int randy2=(int)(Math.random()*600)+1;
 
 
    //Declare the objects used in the program
@@ -49,6 +55,9 @@ public class BasicGameApp implements Runnable {
 	private soccer_player messi;
     private soccer_player Van_dijk;
     private Soccer_ball Genericball;
+    private goal left_goal;
+    private goal right_goal;
+
 
 
    // Main method definition
@@ -66,16 +75,19 @@ public class BasicGameApp implements Runnable {
 	public BasicGameApp() {
       
       setUpGraphics();
-       int randx=(int)(Math.random()*900)+1;//gonna make the players spwawn anywhere on their half
+
+       //gonna make the players spawn anywhere on their half
       //variable and objects
       //create (construct) the objects needed for the game and load up 
 		soccerPic = Toolkit.getDefaultToolkit().getImage("messi.jpeg");
         soccerPic2 = Toolkit.getDefaultToolkit().getImage("van dijk.jpeg");
         //load the picture
-		messi = new soccer_player(940,600);
-        Van_dijk=new soccer_player(10,100);
+		messi = new soccer_player(randx2,randy2);
+        Van_dijk=new soccer_player(randx,randy);
+        left_goal=new goal(40,310);
+        right_goal=new goal(930,310);
         Soccerball= Toolkit.getDefaultToolkit().getImage("soccerball.jpg");
-        Genericball= new Soccer_ball(400,500);
+        Genericball= new Soccer_ball(500,370);
         soccerfield=Toolkit.getDefaultToolkit().getImage("field.jpeg");
 
 
@@ -108,16 +120,77 @@ public class BasicGameApp implements Runnable {
 		messi.move();
         Van_dijk.move();
         Genericball.move();
-        colliding();
-        //testcolliding();
+        //colliding();//if i can get this to work i will
+        jankycolliding();//so this works about half the time the other half it kinda gets stuck
+        scoring();
 
 	}
-    public void testcolliding(){
-        if(messi.body.intersects(Van_dijk.body)){
-            messi.dy = -messi.dy;
-            Van_dijk.dy = -Van_dijk.dy;
+    public void jankycolliding() {
+        if (messi.body.intersects(Van_dijk.body)) {
+            int randbounce=(int)(Math.random()*10)+1;
+            if (randbounce<=5) {
+                messi.dy = -messi.dy;
+                Van_dijk.dy = -Van_dijk.dy;
+            }
+            else{
+                messi.dx = -messi.dx;
+                Van_dijk.dx = -Van_dijk.dx;
+            }
+        }
+        if (messi.body.intersects(Genericball.hitbox)) {
+            int randbounce=(int)(Math.random()*10)+1;
+            if (randbounce<=5) {
+                messi.dy = -messi.dy;
+                Genericball.dy = -Genericball.dy;
+            }
+            else{
+                messi.dx = -messi.dx;
+                Genericball.dx = -Genericball.dx;
+            }
+        }
+        if (Van_dijk.body.intersects(Genericball.hitbox)) {
+            int randbounce=(int)(Math.random()*10)+1;
+            if (randbounce<=5) {
+                Van_dijk.dy = -Van_dijk.dy;
+                Genericball.dy = -Genericball.dy;
+            }
+            else{
+                Van_dijk.dx = -Van_dijk.dx;
+                Genericball.dx = -Genericball.dx;
+            }
+
         }
     }
+    public void scoring(){
+        int brandx=(int)(Math.random()*400)+1;
+         int brandy=(int)(Math.random()*600)+1;
+         int brandx2=(int)(Math.random()*330)+600;
+         int brandy2=(int)(Math.random()*600)+1;
+        if(Genericball.hitbox.intersects(left_goal.net)){
+            System.out.println("goal");
+            right_score=right_score+1;
+            System.out.println("the score is"+left_score+"-"+right_score);
+            messi.xpos=brandx2;
+            messi.ypos=brandy2;
+            Van_dijk.xpos=brandx;
+            Van_dijk.ypos=brandy;
+            Genericball.xpos=500;
+            Genericball.ypos=370;
+
+        }
+        if (Genericball.hitbox.intersects(right_goal.net)){
+            System.out.println("goal");
+            left_score=left_score+1;
+            System.out.println("the score is"+left_score+"-"+right_score);
+            messi.xpos=brandx2;
+            messi.ypos=brandy2;
+            Van_dijk.xpos=brandx;
+            Van_dijk.ypos=brandy;
+            Genericball.xpos=500;
+            Genericball.ypos=370;
+        }
+    }
+
 	public void colliding(){
         if(messi.body.intersects(Van_dijk.body)&&messi.dy==-Van_dijk.dy){
 
@@ -235,6 +308,8 @@ public class BasicGameApp implements Runnable {
         g.drawRect(Genericball.hitbox.x, Genericball.hitbox.y,Genericball.width,Genericball.height);
         g.drawRect(messi.body.x,messi.body.y,messi.width,messi.height);
         g.drawRect(Van_dijk.body.x,Van_dijk.body.y,Van_dijk.width,Van_dijk.height);
+        g.drawRect(left_goal.net.x,left_goal.net.y,left_goal.width,left_goal.height);
+        g.drawRect(right_goal.net.x,right_goal.net.y, right_goal.width, right_goal.height);
 		g.dispose();
 
 		bufferStrategy.show();
