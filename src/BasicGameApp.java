@@ -121,14 +121,15 @@ public class BasicGameApp implements Runnable {
         Van_dijk.move();
         Genericball.move();
         //colliding();//if i can get this to work i will
-        jankycolliding();//so this works about half the time the other half it kinda gets stuck
-        scoring();
+        probabilitycolliding();//so this works about half the time the other half it kinda gets stuck and tweaks out for a bit
+        scoring();//kinda obvious
+        golazo();//end screen
 
 	}
-    public void jankycolliding() {
+    public void probabilitycolliding() {//wee bit janky
         if (messi.body.intersects(Van_dijk.body)) {
             int randbounce=(int)(Math.random()*10)+1;
-            if (randbounce<=5) {
+            if (randbounce<=5) {//half the time it changes dx other half changes dy henceforth it'll work half the time
                 messi.dy = -messi.dy;
                 Van_dijk.dy = -Van_dijk.dy;
             }
@@ -161,7 +162,27 @@ public class BasicGameApp implements Runnable {
 
         }
     }
-    public void scoring(){
+    public void golazo(){//winning screen
+        if (right_score==2){
+            messi.dx=0;
+            messi.dy=0;
+            Van_dijk.dx=0;
+            Van_dijk.dy=0;
+            Genericball.dx=0;
+            Genericball.dy=0;
+            System.out.println("right wins");
+        }
+        if (left_score==2){
+            messi.dx=0;
+            messi.dy=0;
+            Van_dijk.dx=0;
+            Van_dijk.dy=0;
+            Genericball.dx=0;
+            Genericball.dy=0;
+            System.out.println("left wins");
+        }
+    }
+    public void scoring(){//reset all the things after goal
         int brandx=(int)(Math.random()*400)+1;
          int brandy=(int)(Math.random()*600)+1;
          int brandx2=(int)(Math.random()*330)+600;
@@ -191,7 +212,7 @@ public class BasicGameApp implements Runnable {
         }
     }
 
-	public void colliding(){
+	public void colliding(){//ignore all this im keeping to make sure i dont end up accidentsaly doing the same thing over and over again
         if(messi.body.intersects(Van_dijk.body)&&messi.dy==-Van_dijk.dy){
 
             messi.dy = -messi.dy;

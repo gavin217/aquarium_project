@@ -29,8 +29,8 @@ public class soccer_player {
     //This is a SECOND constructor that takes 3 parameters.  This allows us to specify the hero's name and position when we build it.
     // if you put in a String, an int and an int the program will use this constructor instead of the one above.
     public soccer_player(int pXpos, int pYpos) {
-        int randdy=(int)(Math.random()*5)+1;
-        int randdx=(int)(Math.random()*5)+1;
+        int randdy=(int)(Math.random()*5)+5;
+        int randdx=(int)(Math.random()*5)+5;
         xpos = pXpos;
         ypos = pYpos;
         dx =randdx;
